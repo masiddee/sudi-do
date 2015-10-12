@@ -1,0 +1,105 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.clearfix:after {
+	display: table;
+	content: " ";
+	clear: both;
+}
+
+h1 {
+	font-size: 46px;
+}
+
+.container {
+	width: 960px;
+}
+
+.input-holder {
+	width: 400px;
+	margin: 50px auto 20px;
+}
+
+.input-holder .input-task {
+	width: 100%;
+	margin-bottom: 10px;
+	padding: 10px;
+	font-size: 22px;
+	color: #C45E32;
+	border: 1px solid #ccc;
+}
+
+.input-holder .input-task:focus {
+	outline: none !important;
+    border: 1px solid #cdcdcd;
+    box-shadow: 0 0 5px #ccc;
+}
+
+.input-holder .submit-task {
+	width: 54%;
+	margin-left: 2px;
+}
+
+.input-holder .clear-completed-task {
+	width: 44%;
+}
+
+.todo {
+	width: 600px;
+	margin: 0 auto;
+}
+
+.todo li {
+	font-size: 20px;
+	margin: 5px 0;
+	color: #C48552;
+	padding: 5px 10px;
+	/*list-style-type: none;*/
+}
+
+.todo li:hover {
+	border: 1px dotted #f0f0f0;
+}
+
+.todo li .complete-box {
+	margin-right: 15px;
+}
+
+.todo li.completed {
+	text-decoration: line-through;
+	color: #ccc;
+}
+
+.todo li .edit-input-task {
+	border: none;
+	border-bottom: 1px dotted #cecece;
+	padding: 6px;
+}
+
+.todo li .edit-input-task:focus {
+	border: none;
+	border-bottom: 1px dotted #cecece;
+	outline: none !important;
+    box-shadow: 0 0 0;
+}
+
+.todo li .edit-task {
+	display: none;
+}
+
+.todo li:hover .edit-task {
+	display: inline;
+	padding-left: 10px;
+	color: #ccc;
+	font-size: 16px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.todo li .edit-task.hide {
+	display: none;
+}

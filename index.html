@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+    	<meta name="description" content="Your description goes here">
+    	<meta name="keywords" content="one, two, three">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Sudi's Tasks</title>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+		<!-- external CSS link -->
+		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="css/app.css">
+		
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<h1 class="text-center">Taskinator</h1>
+					
+					<div class="input-holder">
+						<input type="text" class="input-task"><br>
+
+						<a href="#" class="btn btn-success submit-task">Submit Task</a>
+						<a href="#" class="btn btn-default clear-completed-task">Clear Completed Tasks</a>
+					</div>
+
+					<ol class="todo">
+						
+					</ol>
+				</div>
+			</div>
+		</div><!-- .container --> 
+
+		
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script>
+			var myTask;
+			var myEditTask;
+			var currentTask;
+
+			$('.submit-task').click(function(event){
+				event.preventDefault();
+				myTask = $('.input-task').val();
+
+				if (myTask != '') {
+					$('.todo').append('<li class="tasks not-completed"><input type="checkbox" class="complete-box">' + myTask + '<span class="edit-task">Edit</span></li>');
+					$('.input-task').val("").focus();
+				};
+			});
+
+			$('.input-task').keypress(function(event){
+				myTask = $('.input-task').val();
+
+				if (event.which == 13 && myTask != '') {
+					$('.todo').append('<li class="tasks not-completed"><input type="checkbox" class="complete-box">' + myTask + '<span class="edit-task">Edit</span></li>');
+					$('.input-task').val("");
+				};
+			});
+
+			// Remove completed tasks
+			$('.clear-completed-task').click(function(event){
+				event.preventDefault();
+
+				if (!$('li').hasClass('completed')) {
+					alert("Please mark tasks as completed before attempting to clear");
+				}else{
+					$('.completed').remove();
+				};
+			});
+
+			// Edit current task
+			$('.todo').on('click','.edit-task',function(){
+				currentTask = $(this).parent().html();
+				$(this).parent().html('<input type="text" class="edit-input-task"><a href="#" class="submit-edit-task">Update Task</a><a href="#" class="cancel-edit-task">Cancel</a>')
+			});
+
+			// Update current task Edit
+			$('.todo').on('click','.submit-edit-task',function(event){
+				event.preventDefault();
+
+				myEditTask = $('.edit-input-task').val();
+				$(this).parent().html('<input type="checkbox" class="complete-box">' + myEditTask + '<span class="edit-task">Edit</span></li>');
+				$(this).parent().addClass('not-completed');
+				//console.log(myEditTask);
+			});
+
+			// Reset task to previous value
+			// Currently has an issue if you click to edit 2 tasks at once
+			$('.todo').on('click','.cancel-edit-task',function(event){
+				event.preventDefault();
+
+				$(this).parent().html(currentTask);
+			});
+
+			// Mark task as completed/uncompleted
+			$('.todo').on('click','.complete-box',function(){
+				if ($(this).parent().hasClass('not-completed')) {
+					$(this).parent().addClass('completed').removeClass('not-completed');
+					$(this).parent().children('span').addClass('hide');
+				}else{
+					$(this).parent().addClass('not-completed').removeClass('completed');
+					$(this).parent().children('span').removeClass('hide');
+				};
+			});
+
+		</script>
+	</body>
+</html>
